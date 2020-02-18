@@ -1,15 +1,34 @@
 import React from 'react';
 import logo, { ReactComponent } from './logo.svg';
+import productTile from './components/producttile';
 import './App.css';
+const productsarray = [
+  {
+    "id": 1,
+    "title" : "HP Core i3 6th Gen",
+    "price" : "Rs 45000",
+    "image" : "https://rukminim1.flixcart.com/image/704/704/jdyuefk0/computer/t/u/4/hp-na-laptop-original-imaf2rdcgrw8nzfv.jpeg?q=70"
+  },
+  
+  {
+    "id": 2,
+    "title" : "MSI GV 62 7RE",
+    "price" : "Rs 70000",
+    "image" : "https://rukminim1.flixcart.com/image/704/704/ja73ki80/computer/v/v/x/msi-na-gaming-laptop-original-imaeztu7nz9e6mz9.jpeg?q=70"
+  }
+]
+
 
 class App extends React.Component {
-  constructor(props){
+
+  constructor(props) {
     super(props)
     this.state = {
       firstState: 'hello World',
       cartCount: 0,
       alertOnCartCount: 10,
-      limitreached: false
+      limitreached: false,
+      products : []
     }
   }
   componentDidMount() {
@@ -17,24 +36,37 @@ class App extends React.Component {
       firstState: 'Welcome to our shop'
     })
   }
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     console.log(this.state)
-    if(this.state.cartCount==this.state.alertOnCartCount)
-    {
-      this.state.limitreached=true
-    alert("Oops,Count exceeded more than 10 items")
+    if (this.state.cartCount >= this.state.alertOnCartCount) {
+      this.state.limitreached = true
+      alert("Oops,Count exceeded more than 10 items")
     }
   }
-  addCount()
-  { if(this.state.limitreached==false)
-    {
-    const newCount = this.state.cartCount + 1;
-    this.setState({cartCount : newCount
-    })
+  loadProducts()
+  {
+    this.setState({
+      
+        products : productsarray
+    }
+    )
   }
   
-}
+  addCount() {
+    if (this.state.limitreached == false) {
+      const newCount = this.state.cartCount + 1;
+      this.setState({
+        cartCount: newCount
+      })
+    }
+
+  }
+  
   render() {
+    const productlist = this.state.products.map((product)=>{
+      return productTile(this.addCount.bind(this),product)
+    })
+    console.log(productlist)
     return (
       <div>
         <nav className="navbar  navbar-dark bg-primary">
@@ -44,27 +76,14 @@ class App extends React.Component {
             Amazon
           </a>
           {this.state.firstState}
-          <button type="button" className="btn btn-success"  
+          <button onClick={() =>{this.loadProducts()}}>load products</button>
+          <button type="button" className="btn btn-success"
           >Cart {this.state.cartCount}
           </button>
         </nav>
         <div className="container">
           <p className="sh">Laptops</p>
-          <div className="row">
-            <div className="col-3">
-              <div className="my-list">
-                <img
-                  className="imm"
-                  src="https://rukminim1.flixcart.com/image/704/704/jdyuefk0/computer/t/u/4/hp-na-laptop-original-imaf2rdcgrw8nzfv.jpeg?q=70"
-                  alt="dsadas" width="300" height="230"
-                />
-                <h3>HP Core i3 6th Gen</h3>
-                <span> RS:45K </span>
-                <a href="#" className="btn btn-info" onClick={() => {this.addCount()}
-          }>Add To Cart</a>
-              </div>
-            </div>
-          </div>
+          {productlist}
           <div className="row d-flex justify-content-end">
             <button type="button" className="btn btn-primary" id="er">CHECKOUT </button>
           </div>
@@ -73,5 +92,4 @@ class App extends React.Component {
     )
   }
 }
-
 export default App;
