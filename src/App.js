@@ -15,6 +15,13 @@ const productsarray = [
     "title" : "MSI GV 62 7RE",
     "price" : "Rs 70000",
     "image" : "https://rukminim1.flixcart.com/image/704/704/ja73ki80/computer/v/v/x/msi-na-gaming-laptop-original-imaeztu7nz9e6mz9.jpeg?q=70"
+  },
+
+  {
+    "id" : 3,
+    "title" : "Airgun",
+    "price" : "Rs 6000",
+    "image" : "https://www.airsoftgunindia.com/wp-content/uploads/2018/01/img_6810.jpg" 
   }
 ]
 
@@ -71,7 +78,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar  navbar-dark bg-primary">
           <a className="navbar-brand" href="#">
-            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Famazon%2Famazon_PNG22.png&f=1&nofb=1"
+            <img src="hprttps://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpngimg.com%2Fuploads%2Famazon%2Famazon_PNG22.png&f=1&nofb=1"
               width="30" height="30" className="d-inline-block align-top" alt="" />
             Amazon
           </a>
